@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[详细配置Next部分功能及插件]]></title>
+    <url>%2F2018%2F02%2F26%2F%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AENext%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%8F%8A%E6%8F%92%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[本篇文章只介绍配置Next主题，如若不是这个主题便可不用浏览！！！站点配置文件为博客目录下的_config.yml文件，主题配置文件为主题目录下的_config.yml文件！！！ 首先进入Next主页：https://github.com/iissnan/hexo-theme-next 复制它的 SSH 地址或 HTTPS 地址，假设地址为 git@github.com:iissnan/hexo-theme-next.git cd themes git clone git@github.com:iissnan/hexo-theme-next.git cd .. 将 _config.yml 的第 75 行改为 theme: hexo-theme-next，保存 hexo generate hexo deploy###以上已经修改主题了，接下来修改主题功能及添加插件9.先修改Schenme,我选择的是： 设置菜单，编辑主题配置文件：（可任意修改） 设置菜单项的图标：默认就好，图标也可修改为其他，严格区分大小写！！！ 修改侧栏sidebar的位置： position: left 设置侧栏显示的时机： display: always 设置头像，将头像图片放在next\source\images目录下： avatar: /images/1.jpg 设置RSS： npm install hexo-generator-feed –save 设置代码高亮主题： highlight_theme: night eighties 设置侧边栏社交连接：设置连接的图标： 开启打赏功能： 设置站点建立时间： since: 2018 设置动画效果： motion.enable: true 开启动画： canvas_nest: truethree_waves: true ###配置搜索服务####LocalSearch安装： npm install hexo-generator-searchdb –save 在站点配置文件新增如下：在主题配置文件新增： ####Algolia搜索 登录Algolia官网，注册账号，在indices中新添加一个index，名字可以随意取，但是后面需要用到例如personal_blog. 在ApiKey中找到Search-Only API Key，再点击ALL API KEYS找到对应的Key并将personal_blog添加进去，在ACL中勾选如下，点击更新： 修改站点配置文件，添加内容如下，在红线处填入你的Algolia中的Key，apikey即为Search-Only API Key：修改主题配置文件： algolia_search: enable: true 安装插件： npm install –save hexo-algolia 配置环境变量 export HEXO_ALGOLIA_INDEXING_KEY=你的API Key注意：运行此命令时，切记是在git bash中运行代码，若你不是用到git bash运行，请另行参考。此处的API Key=Search-Only API Key=站点配置重点apiKey。 更新index hexo algolia 若出现以下画面即为成功： 若出现Algolia搜索栏但是无法跳转到搜索结果，请运行以下代码： npm install hexo-algolia@0.2.0 然后在站点配置中找到package.json， 把里面的hexo-algolia， 換成 “hexo-algolia”: “^0.2.0”，如图：由此，配置完成。 ####来必力评论 登录来必力官网,注册，选择安装版本，选择个人版 获取data-uid： 修改主题配置文件：由此配置完成。####其他配置将以后更新！谢谢浏览！#参考文章：NexT使用文档邻家枫扬在知乎的回答大都小酒馆5.1.0使用algolia搜索问题1022_zhang’s Blog ###纯属个人简单操作，望大佬些细心指出错误或不足之处！！！]]></content>
+      <tags>
+        <tag>NexT</tag>
+        <tag>添加NexT插件机部分功能使用</tag>
+        <tag>插件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Hexo+GitHub搭建个人博客]]></title>
+    <url>%2F2018%2F02%2F26%2F%E4%BD%BF%E7%94%A8Hexo-GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[选择一个目录（最好不要在桌面） 在 GitHub 上新建一个空仓库，仓库名称是「你的用户名.github.io」（请将你的用户名替换成真正的用户名） 安装Hexo： npm install -g hexo-cli 创建自己的博客文件夹： hexo init MyBlog 切换到自己的博客文件夹： cd MyBlog 安装 package.json 中记录的模块： npm i 创建一个(测试)博客： hexo new test 编辑这个文件，可在上图所示的路径中打开文件编辑。即在MyBlog\source_posts\目录下，若用指令： start source/_posts/test.md注意：路径的\和/区别，Windows下为\，而bash下为/，千万不要弄错了！！！ 编辑站点配置： start _config.yml 把第 6 行的 title 改成你想要的名字 把第 9 行的 author 改成你的大名 把第 10 行的 language 改为：language: zh-Hans（即为中文简体） 把最后一行的 type 改成 type: git 在最后一行后面新增一行，左边与 type 平齐，加上一行 repo: 仓库地址 （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址以 git@github.com: 开头你知道吧？不知道？不知道的话现在你知道了） 第 4 步的 repo: 后面有个空格，不要眼瞎。 安装 git 部署插件: npm install hexo-deployer-git –save 部署hexo： hexo deploy 打开仓库的GitHub Pages 功能，即可看到自己的博客页！ 创建第二篇博客： hexo new 第二篇博客 编辑第二篇博客 hexo generate hexo deploy如果你想换个主题可看下一篇文章：详细配置Next部分功能及插件#参考文章：NexT使用文档邻家枫扬在知乎的回答大都小酒馆5.1.0使用algolia搜索问题1022_zhang’s Blog ###纯属个人简单操作，望大佬些细心指出错误或不足之处！！！]]></content>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[test]]></title>
     <url>%2F2018%2F02%2F26%2Ftest%2F</url>
     <content type="text"><![CDATA[jjjjjjjjjjjs;lkajf;sjf;la]]></content>
